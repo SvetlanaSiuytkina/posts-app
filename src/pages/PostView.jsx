@@ -14,7 +14,7 @@ export default function PostView() {
   useEffect(() => {
     getPost(id).then((data) => {
       setPost(data.post);
-      setContent(data.content)
+      setContent(data.post.content)
     });
   }, [id]);
 
@@ -23,8 +23,8 @@ export default function PostView() {
   if (isEditing) {
     async function handlySave() {
       await updatePost(id, content);
-      setPost({post, content});
-      setIsEditing(false);
+      setPost((prev) => ({ ...prev, content }));
+     setIsEditing(false);
     }
 
     return (
